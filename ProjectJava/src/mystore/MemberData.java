@@ -13,26 +13,31 @@ import java.util.Scanner;
  * @author IMMORTALITY IPOS
  */
 public class MemberData {
-    
+
     Scanner sc = new Scanner(System.in);
     VipMember newMember;
 
     ArrayList<VipMember> data = new ArrayList<VipMember>();
     static final String MEMBER_FILE = "ListMember.txt";
-    
+
     public void addNewMember() {
         String name;
         int phone;
         System.out.print("Input New Member Name: ");
         name = sc.nextLine();
-        System.out.print("Input Five Last Phone Numbers: ");
-        phone = Validate.getAInteger();
+        do {
+            System.out.print("Input Five Last Phone Numbers: ");
+            phone = Validate.getAInteger();
+            if (aMember(phone)) {
+                System.out.println("Phone number has already existed!");
+            }
+        } while (aMember(phone));
         System.out.println("\n=*=ADDED SUCCESSFUL=*=\n");
         newMember = new VipMember(name, phone);
         data.add(newMember);
         IOFileMenu.writeToFile(data, MEMBER_FILE);
     }
-    
+
     public void viewAllMember() {
         data.clear();
         System.out.println("\n=*=LIST MEMBER=*=\n");
@@ -42,27 +47,40 @@ public class MemberData {
             System.out.println(data.get(i).toString());
         }
     }
-    
-    public boolean findVipMember() {
-        int i;
-        int memberID;
-        boolean found = false;
+
+    public int getMemberID(int number) {
+        data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
-        do {
-            System.out.print("\nInput Your Vip Member ID: ");
-            memberID = Validate.getAInteger();
-            for (i = 0; i < data.size(); i++) {
-                if (data.get(i).getFiveLastPhoneNumbers()== memberID) {
-                    System.out.println("\nHello " + data.get(i).getName() + " !");
-                    found = true;
-                }
+        for (int i = 0; i < data.size(); i++) {
+            if (number == data.get(i).getFiveLastPhoneNumbers()) {
+                return number;
             }
-            if (!found && memberID != 1) {
-                System.out.println("\nNot Found ID.");               
-            }
-            
-        } while(found == false && memberID != 1);
-        return found;
+        }
+        return -1;
     }
 
+    public String getMemberName(int number) {
+        data.clear();
+        data = IOFileMenu.readFromFile(MEMBER_FILE);
+        for (int i = 0; i < data.size(); i++) {
+            if (number == data.get(i).getFiveLastPhoneNumbers()) {
+                return data.get(i).getName();
+            }
+        }
+        return null;
+    }
+
+    public boolean aMember(int number) {
+        data.clear();
+        data = IOFileMenu.readFromFile(MEMBER_FILE);
+        if (data.size() == 0) {
+            return false;
+        }
+        for (int i = 0; i < data.size(); i++) {
+            if (number == data.get(i).getFiveLastPhoneNumbers()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

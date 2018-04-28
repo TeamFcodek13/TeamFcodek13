@@ -34,14 +34,13 @@ public class IOFileMenu {
             ex.printStackTrace();
         }
     }
-    
 
     public static <T> ArrayList<T> readFromFile(String url) {
         ArrayList<T> arrayList = new ArrayList<>();
         File file = new File(url);
         try {
-            FileInputStream fIS = new FileInputStream(file);
-            ObjectInputStream oIS = new ObjectInputStream(fIS);
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream oIS = new ObjectInputStream(fis);
             arrayList = (ArrayList<T>) oIS.readObject();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();

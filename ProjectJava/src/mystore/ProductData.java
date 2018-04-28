@@ -6,6 +6,7 @@
 package mystore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 /**
@@ -134,15 +135,11 @@ public class ProductData {
     }
 
     public void orderDrink() {
-        int ID;
-        double sum = 0;
-        int quantity = 0;
-        int choice = 0;
-        int choice1;
-        double subTotal = 0;
-        int i;
+        int ID, quantity = 0, choice, i, valid = 0;;
+        double sum = 0, subTotal = 0;
         data = IOFileMenu.readFromFile(MENU_FILE);
         info = IOFileMenu.readFromFile(BILL_FILE);
+        Calendar date = Calendar.getInstance();
         viewProduct();
         do {
             boolean found = false;
@@ -168,8 +165,8 @@ public class ProductData {
 
             } while (found == false);
             System.out.print("\nEnter '1' to finish or Press other number to continue: ");
-            choice1 = Validate.getAInteger();
-        } while (choice1 != 1);
+            choice = Validate.getAInteger();
+        } while (choice != 1);
         System.out.println("Are you a member? ");
         System.out.print("Press '1' If You're Member OR Other Numbers To Finish: ");
         if (Validate.getAInteger() == 1) {
@@ -181,9 +178,13 @@ public class ProductData {
                     sum = sum * 0.8;
                     info.get(info.size() - 1).setSum(sum);
                     info.get(info.size() - 1).setOff(20);
+                    info.get(info.size() - 1).setMemberName(dataMember.getMemberName(number));
+                    info.get(info.size() - 1).setMemberID(dataMember.getMemberID(number));
+                    info.get(info.size() - 1).setDate(date.getTime());
                     System.out.printf("Total: %.1f, off: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
                     IOFileMenu.writeToFile(info, BILL_FILE);
                     answer = 2;
+                    valid++;
                 } else {
                     System.out.println("Sorry But You're Not Member!\n");
                     System.out.print("Press '1' To Continue Or Other Numbers To Finish: ");
@@ -192,11 +193,12 @@ public class ProductData {
             } while (answer == 1);
         } else {
             info.get(info.size() - 1).setSum(sum);
-            IOFileMenu.writeToFile(info, BILL_FILE);
+            info.get(info.size() - 1).setDate(date.getTime());
             System.out.printf("\nTotal: %.1f, off: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
+            IOFileMenu.writeToFile(info, BILL_FILE);
         }
 
-        if (subTotal >= 100) {
+        if (subTotal >= 100 && valid == 0) {
             System.out.print("Enter 1 if you want to add member: ");
             if (Validate.getAInteger() == 1) {
                 dataMember.addNewMember();
@@ -207,12 +209,24 @@ public class ProductData {
     public void viewAllBills() {
         info.clear();
         info = IOFileMenu.readFromFile(BILL_FILE);
+        System.out.println("----------------------------NEW BILL---------------------------------------");
         System.out.printf("|%-3s|%-10s|%-5s|%-7s|%-5s\n", "ID", "Name", "Price", "Quantity", "Total");
         for (int i = 0; i < info.size(); i++) {
-            System.out.println(info.get(i).toString());
-            if (info.get(i).getSum() != 0) {
+            if (info.get(i).getSum() == 0) {
+                System.out.println(info.get(i).toString());
+            }
+            if (info.get(i).getSum() > 0) {
+                System.out.println(info.get(i).toString());
                 System.out.println("__________________________________________________________________");
-                System.out.printf("Total: %.1f, off: %.1f\n\n", info.get(i).getSum(), info.get(i).getOff());
+                System.out.printf("Total: %.1f, off: %.1f\n", info.get(i).getSum(), info.get(i).getOff());
+                if (info.get(i).getOff() > 0) {
+                    System.out.printf("Member: %s, Phone: %d\n", info.get(i).getMemberName(), info.get(i).getMemberID());
+                }
+                System.out.println(info.get(i).getDate() + "\n");
+                if (i != info.size() - 1) {
+                    System.out.println("----------------------------NEW BILL---------------------------------------");
+                    System.out.printf("|%-3s|%-10s|%-5s|%-7s|%-5s\n", "ID", "Name", "Price", "Quantity", "Total");
+                }
             }
 
         }
