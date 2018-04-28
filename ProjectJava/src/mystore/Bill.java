@@ -12,33 +12,40 @@ import java.io.Serializable;
  * @author IMMORTALITY IPOS
  */
 public class Bill implements Serializable {
+
+    private String name;
+    private double price;
+    private int ID;
+    private int quantity;
     private double subTotal;
-    private double saleOff;
+    private double sum = 0;
+    private double off = 0;
 
-    public double getSubTotal() {
-        return subTotal;
-    }
-
-    public void setSubTotal(double subTotal) {
+    Bill(int ID, String name, double price, int quantity, double subTotal) {
+        this.ID = ID;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
         this.subTotal = subTotal;
-    }
-
-    public double getSaleOff() {
-        return saleOff;
-    }
-
-    public void setSaleOff(double saleOff) {
-        this.saleOff = saleOff;
-    }
-    
-    
-    Bill(double subTotal, double saleOff) {
-        this.subTotal = subTotal;
-        this.saleOff = saleOff;
     }
 
     public String toString() {
-        return String.format("|%-8.1f|%-8.1f|", subTotal, saleOff);
+        return String.format("|%-3d|%-10s|%-5.1f|%-8d|%-5.1f", ID, name, price, quantity, subTotal);
     }
-    
+
+    public double getSum() {
+        return sum;
+    }
+
+    public double getOff() {
+        return off;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
+
+    public void setOff(double off) {
+        this.off = off;
+    }
 }
