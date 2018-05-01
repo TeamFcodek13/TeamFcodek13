@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mystore;
 
 import java.io.Serializable;
@@ -17,7 +13,7 @@ public class Bill implements Serializable {
     private String name, memberName;
     private Date date;
     private double price;
-    private int ID, quantity, memberID;
+    private int ID, quantity, memberID, star;
     private double subTotal, sum = 0, off = 0;
 
     Bill(int ID, String name, double price, int quantity, double subTotal) {
@@ -51,6 +47,11 @@ public class Bill implements Serializable {
     public int getMemberID() {
         return memberID;
     }
+    
+    public int getMemberStar() {
+        return star;
+    }
+
 
     public void setSum(double sum) {
         this.sum = sum;
@@ -70,6 +71,9 @@ public class Bill implements Serializable {
 
     public void setMemberID(int id) {
         this.memberID = id;
+    }
+    public void setStar(int star) {
+        this.star = star;
     }
 
     public String toString() {
