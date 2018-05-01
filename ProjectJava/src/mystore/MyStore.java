@@ -34,7 +34,8 @@ public class MyStore {
                         System.out.println("\n1. Order And Paying.");
                         System.out.println("2. Add Vip Member.");
                         System.out.println("3. View All Vip Member.");
-                        System.out.println("4. Exit.");
+                        System.out.println("4. Find Member.");
+                        System.out.println("5. Exit.");
                         System.out.print("\n---Please Choose: ");
                         choice2 = Validate.getAInteger();
                         switch (choice2) {
@@ -48,9 +49,12 @@ public class MyStore {
                                 dataMember.viewAllMember();
                                 break;
                             case 4:
+                                dataMember.findMember();
+                                break;
+                            case 5:
                                 return;
                         }
-                    } while (choice2 != 4);
+                    } while (choice2 != 5);
                     break;
 
                 case 2:
@@ -62,7 +66,8 @@ public class MyStore {
                         System.out.println("4. Update By Drink ID.");
                         System.out.println("5. Delete By Drink ID.");
                         System.out.println("6. View All Bill");
-                        System.out.println("7. Exit!\n");
+                        System.out.println("7. Edit Member.");
+                        System.out.println("8. Exit!\n");
                         System.out.print("Your choose: ");
                         choice1 = Validate.getAInteger();
                         switch (choice1) {
@@ -85,9 +90,12 @@ public class MyStore {
                                 dataProduct.viewAllBills();
                                 break;
                             case 7:
+                                dataMember.updateMember();
+                                break;
+                            case 8:
                                 return;
                         }
-                    } while (choice != 7);
+                    } while (choice != 8);
                     break;
 
                 case 3:
@@ -97,4 +105,3 @@ public class MyStore {
     }
 
 }
-

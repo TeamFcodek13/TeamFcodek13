@@ -53,6 +53,7 @@ public class VipMember implements Serializable {
         this.id = id;
         this.phone = phone;
     }
+    
 
     public String toString() {
         return String.format("%-5d|%-7s|%-12s|%-5d", id, name, phone, star);

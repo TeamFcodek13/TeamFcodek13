@@ -52,7 +52,7 @@ public class Validate {
             if (phone.matches(rePhone)) {
                 return phone;
             } else {
-                System.out.println("Error please input again\n");
+                System.out.println("Error please input again");
             }
         } while (!phone.matches(rePhone));
         return null;
