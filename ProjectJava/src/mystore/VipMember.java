@@ -11,9 +11,10 @@ import java.io.Serializable;
  *
  * @author IMMORTALITY IPOS
  */
-public class VipMember implements Serializable{
-    private String name;
-    private int fiveLastPhoneNumbers;
+public class VipMember implements Serializable {
+
+    private String name, phone;
+    private int id, star = 0;
 
     public String getName() {
         return name;
@@ -23,21 +24,38 @@ public class VipMember implements Serializable{
         this.name = name;
     }
 
-    public int getFiveLastPhoneNumbers() {
-        return fiveLastPhoneNumbers;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setFiveLastPhoneNumbers(int fiveLastPhoneNumbers) {
-        this.fiveLastPhoneNumbers = fiveLastPhoneNumbers;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public VipMember(String name, int fiveLastPhoneNumbers) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getStar() {
+        return star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
+    }
+
+    VipMember(int id, String name, String phone) {
         this.name = name;
-        this.fiveLastPhoneNumbers = fiveLastPhoneNumbers;
+        this.id = id;
+        this.phone = phone;
     }
 
     public String toString() {
-        return String.format("|%-10s|%-5d|", name, fiveLastPhoneNumbers);
+        return String.format("%-5d|%-7s|%-12s|%-5d", id, name, phone, star);
     }
-    
+
 }

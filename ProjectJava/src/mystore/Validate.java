@@ -21,7 +21,7 @@ public class Validate {
                 number = Double.parseDouble(sc.nextLine());
                 return number;
             } catch (Exception ex) {
-                System.out.print("\nError. Input Again! ");
+                System.out.println("Error");
             }
         }
     }
@@ -34,12 +34,28 @@ public class Validate {
                 number = Integer.parseInt(sc.nextLine());
                 if (number > 0) {
                     return number;
+                } else {
+                    System.out.println("Error.\n");
                 }
-                else System.out.print("\nError. Input Again!\n ");
             } catch (Exception e) {
-                System.out.println("\nError. Input Again!\n ");
+                System.out.println("Error.\n");
             }
         }
+    }
+
+    public static String getPhone() {
+        Scanner sc = new Scanner(System.in);
+        String rePhone = "0\\d{9,10}", phone;
+        do {
+            System.out.print("Enter your phone number: ");
+            phone = sc.nextLine();
+            if (phone.matches(rePhone)) {
+                return phone;
+            } else {
+                System.out.println("Error please input again\n");
+            }
+        } while (!phone.matches(rePhone));
+        return null;
     }
 
 }

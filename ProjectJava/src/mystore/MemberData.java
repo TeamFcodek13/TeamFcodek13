@@ -7,6 +7,7 @@ package mystore;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import mystore.IOFileMenu;
 
 /**
  *
@@ -21,19 +22,20 @@ public class MemberData {
     static final String MEMBER_FILE = "ListMember.txt";
 
     public void addNewMember() {
-        String name;
-        int phone;
+        String name, phone;
+        int id;
         System.out.print("Input New Member Name: ");
         name = sc.nextLine();
         do {
-            System.out.print("Input Five Last Phone Numbers: ");
-            phone = Validate.getAInteger();
-            if (aMember(phone)) {
-                System.out.println("Phone number has already existed!");
+            System.out.print("Input ID: ");
+            id = Validate.getAInteger();
+            if (aMember(id)) {
+                System.out.println("ID has already existed!");
             }
-        } while (aMember(phone));
+        } while (aMember(id));
+        phone = Validate.getPhone();
         System.out.println("\n=*=ADDED SUCCESSFUL=*=\n");
-        newMember = new VipMember(name, phone);
+        newMember = new VipMember(id, name, phone);
         data.add(newMember);
         IOFileMenu.writeToFile(data, MEMBER_FILE);
     }
@@ -42,7 +44,7 @@ public class MemberData {
         data.clear();
         System.out.println("\n=*=LIST MEMBER=*=\n");
         data = IOFileMenu.readFromFile(MEMBER_FILE);
-        System.out.printf("|%-10s|%-5s|\n", "Name", "Phone");
+        System.out.printf("%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
         for (int i = 0; i < data.size(); i++) {
             System.out.println(data.get(i).toString());
         }
@@ -52,7 +54,7 @@ public class MemberData {
         data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
         for (int i = 0; i < data.size(); i++) {
-            if (number == data.get(i).getFiveLastPhoneNumbers()) {
+            if (number == data.get(i).getId()) {
                 return number;
             }
         }
@@ -63,11 +65,33 @@ public class MemberData {
         data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
         for (int i = 0; i < data.size(); i++) {
-            if (number == data.get(i).getFiveLastPhoneNumbers()) {
+            if (number == data.get(i).getId()) {
                 return data.get(i).getName();
             }
         }
         return null;
+    }
+    public int getMemberStar(int number){
+        data.clear();
+        data = IOFileMenu.readFromFile(MEMBER_FILE);
+         for (int i = 0; i < data.size(); i++) {
+            if (number == data.get(i).getId()) {
+                return data.get(i).getStar();
+            }
+        }
+        return -1;
+        
+    }
+     public void setMemberStar(int number){
+        data.clear();
+        data = IOFileMenu.readFromFile(MEMBER_FILE);
+         for (int i = 0; i < data.size(); i++) {
+            if (number == data.get(i).getId()) {
+                data.get(i).setStar(data.get(i).getStar() + 1);
+            }
+        }
+        IOFileMenu.writeToFile(data, MEMBER_FILE);
+        
     }
 
     public boolean aMember(int number) {
@@ -77,7 +101,7 @@ public class MemberData {
             return false;
         }
         for (int i = 0; i < data.size(); i++) {
-            if (number == data.get(i).getFiveLastPhoneNumbers()) {
+            if (number == data.get(i).getId()) {
                 return true;
             }
         }

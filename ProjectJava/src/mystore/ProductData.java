@@ -5,6 +5,10 @@
  */
 package mystore;
 
+import mystore.Product;
+import mystore.Bill;
+import mystore.IOFileMenu;
+import mystore.MemberData;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -175,11 +179,19 @@ public class ProductData {
                 System.out.print("Enter Your ID: ");
                 number = Validate.getAInteger();
                 if (dataMember.aMember(number)) {
+                    if(dataMember.getMemberStar(number) < 100 ){
                     sum = sum * 0.8;
-                    info.get(info.size() - 1).setSum(sum);
                     info.get(info.size() - 1).setOff(20);
+                    }
+                    else{
+                    sum = sum * 0.7;
+                    info.get(info.size() - 1).setOff(30);
+                    }
+                    info.get(info.size() - 1).setSum(sum);
                     info.get(info.size() - 1).setMemberName(dataMember.getMemberName(number));
+                    dataMember.setMemberStar(number);
                     info.get(info.size() - 1).setMemberID(dataMember.getMemberID(number));
+                    info.get(info.size() - 1).setStar(dataMember.getMemberStar(number));
                     info.get(info.size() - 1).setDate(date.getTime());
                     System.out.printf("Total: %.1f, off: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
                     IOFileMenu.writeToFile(info, BILL_FILE);
@@ -220,7 +232,7 @@ public class ProductData {
                 System.out.println("__________________________________________________________________");
                 System.out.printf("Total: %.1f, off: %.1f\n", info.get(i).getSum(), info.get(i).getOff());
                 if (info.get(i).getOff() > 0) {
-                    System.out.printf("Member: %s, Phone: %d\n", info.get(i).getMemberName(), info.get(i).getMemberID());
+                    System.out.printf("Member: %s, ID: %d, Star: %d\n", info.get(i).getMemberName(), info.get(i).getMemberID(), info.get(i).getMemberStar());
                 }
                 System.out.println(info.get(i).getDate() + "\n");
                 if (i != info.size() - 1) {
