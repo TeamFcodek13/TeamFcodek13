@@ -7,7 +7,6 @@ package mystore;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import mystore.IOFileMenu;
 
 /**
  *
@@ -50,6 +49,57 @@ public class MemberData {
         }
     }
 
+    public void findAMember() {
+        int ID = 0;
+        boolean found = false;
+        data = IOFileMenu.readFromFile(MEMBER_FILE);
+        System.out.print("\nInput ID need find: ");
+        ID = Validate.getAInteger();
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getId() == ID) {
+                System.out.printf("%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
+                System.out.println(data.get(i).toString());
+                found = true;
+                return;
+            }
+        }
+        if (!found) {
+            System.out.println("\nNot found ID.");
+        }
+    }
+
+    public void updateMember() {
+        int ID = 0, star;
+        String phone, name;
+        boolean found = false;
+        data = IOFileMenu.readFromFile(MEMBER_FILE);
+        System.out.print("\nInput ID need find: ");
+        ID = Validate.getAInteger();
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getId() == ID) {
+                System.out.printf("%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
+                System.out.println(data.get(i).toString());
+                System.out.print("Input Member Name: ");
+                name = sc.nextLine();
+                data.get(i).setName(name);
+                phone = Validate.getPhone();
+                data.get(i).setPhone(phone);
+                System.out.print("Enter star: ");
+                star = Validate.getAInteger();
+                data.get(i).setStar(star);
+                System.out.println("UPDATE SUCCESSFULLY");
+                System.out.printf("%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
+                System.out.println(data.get(i).toString());
+                found = true;
+                return;
+            }
+        }
+        if (!found) {
+            System.out.println("\nNot found ID.");
+        }
+        IOFileMenu.writeToFile(data, MEMBER_FILE);
+    }
+
     public int getMemberID(int number) {
         data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
@@ -71,27 +121,29 @@ public class MemberData {
         }
         return null;
     }
-    public int getMemberStar(int number){
+
+    public int getMemberStar(int number) {
         data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
-         for (int i = 0; i < data.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             if (number == data.get(i).getId()) {
                 return data.get(i).getStar();
             }
         }
         return -1;
-        
+
     }
-     public void setMemberStar(int number){
+
+    public void setMemberStar(int number) {
         data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
-         for (int i = 0; i < data.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             if (number == data.get(i).getId()) {
                 data.get(i).setStar(data.get(i).getStar() + 1);
             }
         }
         IOFileMenu.writeToFile(data, MEMBER_FILE);
-        
+
     }
 
     public boolean aMember(int number) {

@@ -20,6 +20,7 @@ public class MyStore {
         int choice2;
         ProductData dataProduct = new ProductData();
         MemberData dataMember = new MemberData();
+        Quantity dataQuantity = new Quantity();
         do {
             System.out.println("==*==WELCOME TO MY PROGRAMMING==*==");
             System.out.println("\n1. Staff.");
@@ -34,7 +35,8 @@ public class MyStore {
                         System.out.println("\n1. Order And Paying.");
                         System.out.println("2. Add Vip Member.");
                         System.out.println("3. View All Vip Member.");
-                        System.out.println("4. Exit.");
+                        System.out.println("4. Find a Member.");
+                        System.out.println("5. Exit.");
                         System.out.print("\n---Please Choose: ");
                         choice2 = Validate.getAInteger();
                         switch (choice2) {
@@ -48,9 +50,12 @@ public class MyStore {
                                 dataMember.viewAllMember();
                                 break;
                             case 4:
+                                dataMember.findAMember();
+                                break;
+                            case 5:
                                 return;
                         }
-                    } while (choice2 != 4);
+                    } while (choice2 != 5);
                     break;
 
                 case 2:
@@ -62,7 +67,9 @@ public class MyStore {
                         System.out.println("4. Update By Drink ID.");
                         System.out.println("5. Delete By Drink ID.");
                         System.out.println("6. View All Bill");
-                        System.out.println("7. Exit!\n");
+                        System.out.println("7. Manage Member");
+                        System.out.println("8. Manage Quantity");
+                        System.out.println("9. Exit!\n");
                         System.out.print("Your choose: ");
                         choice1 = Validate.getAInteger();
                         switch (choice1) {
@@ -85,11 +92,46 @@ public class MyStore {
                                 dataProduct.viewAllBills();
                                 break;
                             case 7:
+                                System.out.println("1. Add Member");
+                                System.out.println("2. View Member");
+                                System.out.println("3. Find a Member");
+                                System.out.println("4. Edit Member");
+                                switch (Validate.getAnswer(1, 4)) {
+                                    case 1:
+                                        dataMember.addNewMember();
+                                        break;
+                                    case 2:
+                                        dataMember.viewAllMember();
+                                        break;
+                                    case 3:
+                                        dataMember.findAMember();
+                                        break;
+                                    case 4:
+                                        dataMember.updateMember();
+                                        break;
+                                }
+                                break;
+                            case 8:
+                                System.out.println("1. View quanity of all products");
+                                System.out.println("2. Find quantity of a product");
+                                System.out.println("3. Edit quantity of a product");
+                                switch (Validate.getAnswer(1, 3)) {
+                                    case 1:
+                                        dataQuantity.viewQuantity();
+                                        break;
+                                    case 2:
+                                        dataQuantity.findQuantity();
+                                        break;
+                                    case 3:
+                                        dataQuantity.UpdateQuantity();
+                                        break;
+                                }
+                                break;
+                            case 9:
                                 return;
                         }
-                    } while (choice != 7);
+                    } while (choice != 9);
                     break;
-
                 case 3:
                     return;
             }
@@ -97,4 +139,3 @@ public class MyStore {
     }
 
 }
-

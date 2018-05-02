@@ -15,7 +15,7 @@ public class Product implements Serializable{
 
     private String name;
     private double price;
-    private int ID;
+    private int ID, quantity;
 
     public Product(int ID, String name, double price) {
         this.ID = ID;
@@ -46,10 +46,20 @@ public class Product implements Serializable{
     public void setID(int ID) {
         this.ID = ID;
     }
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
     
     
     public String toString() {
         return String.format("|%-3d|%-10s|%-5.1f|", ID, name, price);
+    }
+    public String toStringQ() {
+        return String.format("|%-3d|%-10s|%-5.1f|%-9s|", ID, name, price, quantity);
     }
 
 }

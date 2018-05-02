@@ -1,4 +1,3 @@
-
 package mystore;
 
 import java.io.Serializable;
@@ -16,7 +15,7 @@ public class Bill implements Serializable {
     private int ID, quantity, memberID, star;
     private double subTotal, sum = 0, off = 0;
 
-    Bill(int ID, String name, double price, int quantity, double subTotal) {
+    public Bill(int ID, String name, double price, int quantity, double subTotal) {
         this.ID = ID;
         this.name = name;
         this.price = price;
@@ -47,11 +46,10 @@ public class Bill implements Serializable {
     public int getMemberID() {
         return memberID;
     }
-    
+
     public int getMemberStar() {
         return star;
     }
-
 
     public void setSum(double sum) {
         this.sum = sum;
@@ -72,6 +70,7 @@ public class Bill implements Serializable {
     public void setMemberID(int id) {
         this.memberID = id;
     }
+
     public void setStar(int star) {
         this.star = star;
     }
