@@ -15,11 +15,14 @@ public class MyStore {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         int choice;
         int choice1;
         int choice2;
         ProductData dataProduct = new ProductData();
         MemberData dataMember = new MemberData();
+        LoginData loginData = new LoginData();
+        
         do {
             System.out.println("==*==WELCOME TO MY PROGRAMMING==*==");
             System.out.println("\n1. Staff.");
@@ -34,8 +37,7 @@ public class MyStore {
                         System.out.println("\n1. Order And Paying.");
                         System.out.println("2. Add Vip Member.");
                         System.out.println("3. View All Vip Member.");
-                        System.out.println("4. Find Member.");
-                        System.out.println("5. Exit.");
+                        System.out.println("4. Exit.");
                         System.out.print("\n---Please Choose: ");
                         choice2 = Validate.getAInteger();
                         switch (choice2) {
@@ -49,15 +51,13 @@ public class MyStore {
                                 dataMember.viewAllMember();
                                 break;
                             case 4:
-                                dataMember.findMember();
-                                break;
-                            case 5:
                                 return;
                         }
-                    } while (choice2 != 5);
+                    } while (choice2 != 4);
                     break;
 
                 case 2:
+                    loginData.login();
                     do {
                         System.out.println("\n==*==PRODUCT MANAGEMENT==*==");
                         System.out.println("\n1. Add New Drink.");
@@ -65,9 +65,10 @@ public class MyStore {
                         System.out.println("3. Find By Drink ID.");
                         System.out.println("4. Update By Drink ID.");
                         System.out.println("5. Delete By Drink ID.");
-                        System.out.println("6. View All Bill");
-                        System.out.println("7. Edit Member.");
-                        System.out.println("8. Exit!\n");
+                        System.out.println("6. View All Bill.");
+                        System.out.println("7. Create New Account.");
+                        System.out.println("8. Change Password.");
+                        System.out.println("9. Exit!\n");
                         System.out.print("Your choose: ");
                         choice1 = Validate.getAInteger();
                         switch (choice1) {
@@ -90,12 +91,15 @@ public class MyStore {
                                 dataProduct.viewAllBills();
                                 break;
                             case 7:
-                                dataMember.updateMember();
+                                loginData.createNewAccount();
                                 break;
                             case 8:
+                                loginData.changePassword();
+                                break;
+                            case 9:
                                 return;
                         }
-                    } while (choice != 8);
+                    } while (choice != 9);
                     break;
 
                 case 3:
@@ -105,3 +109,4 @@ public class MyStore {
     }
 
 }
+
