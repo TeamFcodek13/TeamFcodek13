@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author IMMORTALITY IPOS
  */
-public class Product implements Serializable{
+public class Product implements Serializable {
 
     private String name;
     private double price;
@@ -22,7 +22,7 @@ public class Product implements Serializable{
         this.name = name;
         this.price = price;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -46,6 +46,7 @@ public class Product implements Serializable{
     public void setID(int ID) {
         this.ID = ID;
     }
+
     public int getQuantity() {
         return quantity;
     }
@@ -53,13 +54,12 @@ public class Product implements Serializable{
     public void setQuanity(int quantity) {
         this.quantity = quantity;
     }
-    
-    
+
     public String toString() {
         return String.format("|%-3d|%-10s|%-5.1f|", ID, name, price);
     }
-     public String toStringwithQuantity() {
+
+    public String toStringwithQuantity() {
         return String.format("|%-3d|%-10s|%-5.1f|%-9d", ID, name, price, quantity);
     }
-
 }

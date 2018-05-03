@@ -7,6 +7,7 @@ package mystore;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import mystore.IOFileMenu;
 
 /**
  *
@@ -143,7 +144,6 @@ public class MemberData {
             System.out.println("Not found Member @@.");
         }
         IOFileMenu.writeToFile(data, MEMBER_FILE);
-
     }
 
     public boolean aMember(int number) {
