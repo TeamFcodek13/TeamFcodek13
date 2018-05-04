@@ -18,7 +18,7 @@ public class MenuCases {
         System.out.println(ColorText.ANSI_GREEN + "\n\t1. Staff." + ColorText.ANSI_GREEN);
         System.out.println(ColorText.ANSI_GREEN + "\t2. Manager.");
         System.out.println(ColorText.ANSI_GREEN + "\t3. Exit.");
-        System.out.print(ColorText.ANSI_CYAN + "\n\t\t---Please Choose: " + ColorText.ANSI_CYAN);
+        System.out.print(ColorText.ANSI_BLUE + "\n\t\t---Please Choose: " + ColorText.ANSI_BLUE);
         choice = Validate.getAInteger();
         switch (choice) {
             case 1:
@@ -45,7 +45,7 @@ public class MenuCases {
             System.out.println(ColorText.ANSI_GREEN + "\t3. View All Vip Member." + ColorText.ANSI_GREEN);
             System.out.println(ColorText.ANSI_GREEN + "\t4. Find Vip Member." + ColorText.ANSI_GREEN);
             System.out.println(ColorText.ANSI_GREEN + "\t5. Exit." + ColorText.ANSI_GREEN);
-            System.out.print(ColorText.ANSI_CYAN + "\n\t\t---Please Choose: " + ColorText.ANSI_CYAN);
+            System.out.print(ColorText.ANSI_BLUE + "\n\t\t---Please Choose: " + ColorText.ANSI_BLUE);
             choice = Validate.getAInteger();
             switch (choice) {
                 case 1:

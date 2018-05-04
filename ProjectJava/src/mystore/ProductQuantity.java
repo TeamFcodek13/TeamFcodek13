@@ -19,7 +19,7 @@ public class ProductQuantity {
     public void viewAllQuantity() {
         data.clear();
         data = IOFileMenu.readFromFile(PRODUCT);
-        System.out.printf("|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+        System.out.printf(ColorText.ANSI_BLUE + "|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
         for (int i = 0; i < data.size(); i++) {
             System.out.println(data.get(i).toStringwithQuantity());
         }
@@ -34,7 +34,7 @@ public class ProductQuantity {
         id = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == id) {
-                System.out.printf("|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+                System.out.printf(ColorText.ANSI_BLUE + "|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
                 System.out.println(data.get(i).toStringwithQuantity());
                 found = true;
                 return;
@@ -52,14 +52,14 @@ public class ProductQuantity {
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == ID) {
-                System.out.printf("|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+                System.out.printf(ColorText.ANSI_BLUE + "|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
                 System.out.println(data.get(i).toStringwithQuantity());
                 System.out.print("Enter Quanity: ");
                 quantity = Validate.getAInteger();
                 data.get(i).setQuanity(quantity);
                 found = true;
                 System.out.println("\n=*=UPDATE SUCCESSFULLY=*=");
-                System.out.printf("|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+                System.out.printf(ColorText.ANSI_BLUE + "|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
                 System.out.println(data.get(i).toStringwithQuantity());
                 IOFileMenu.writeToFile(data, PRODUCT);
                 return;
