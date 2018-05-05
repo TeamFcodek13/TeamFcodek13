@@ -21,7 +21,7 @@ public class Validate {
                 number = Double.parseDouble(sc.nextLine());
                 return number;
             } catch (Exception ex) {
-                System.out.println("Error");
+                System.out.println("\n\t\t\t\t\t~~~Input Again: ");
             }
         }
     }
@@ -35,10 +35,10 @@ public class Validate {
                 if (number > 0) {
                     return number;
                 } else {
-                    System.out.println("Error.\n");
+                    System.out.println("\n\t\t\t\t\t~~~Input Again: ");
                 }
             } catch (Exception e) {
-                System.out.println("Error.\n");
+                System.out.println("\n\t\t\t\t\t~~~Input Again: ");
             }
         }
     }
@@ -47,12 +47,12 @@ public class Validate {
         Scanner sc = new Scanner(System.in);
         String rePhone = "0\\d{9,10}", phone;
         do {
-            System.out.print("Enter your phone number: ");
+            System.out.print("\t\t\t\t\tEnter Your Phone Number: ");
             phone = sc.nextLine();
             if (phone.matches(rePhone)) {
                 return phone;
             } else {
-                System.out.println("Error please input again");
+                System.out.println("\n\t\t\t\t\t~~~ERROR PLEASE INPUT AGAIN!\n");
             }
         } while (!phone.matches(rePhone));
         return null;
@@ -63,15 +63,15 @@ public class Validate {
         int number;
         while (true) {
             try {
-                System.out.print("Your answer: ");
+                System.out.print("\t\t\t\t\tYour Answer: ");
                 number = Integer.parseInt(sc.nextLine());
                 if (number >= num1 && number <= num2) {
                     return number;
                 } else {
-                    System.out.println("Error.\n");
+                    System.out.println("\t\t\t\t\t~~~ERROR.\n");
                 }
             } catch (Exception e) {
-                System.out.println("Error.\n");
+                System.out.println("\t\t\t\t\t~~~ERROR.\n");
             }
         }
     }

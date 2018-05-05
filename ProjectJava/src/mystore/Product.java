@@ -56,10 +56,10 @@ public class Product implements Serializable {
     }
 
     public String toString() {
-        return String.format("|%-3d|%-10s|%-5.1f|", ID, name, price);
+        return String.format("\t\t\t\t\t\t|%-3d|%-10s|%-5.1f|", ID, name, price);
     }
 
     public String toStringwithQuantity() {
-        return String.format("|%-3d|%-10s|%-5.1f|%-9d", ID, name, price, quantity);
+        return String.format("\t\t\t\t\t\t|%-3d|%-10s|%-5.1f|%-9d", ID, name, price, quantity);
     }
 }

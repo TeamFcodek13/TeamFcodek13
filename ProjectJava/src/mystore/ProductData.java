@@ -27,33 +27,33 @@ public class ProductData {
         String name;
         double price;
 
-        System.out.println("\n=*=ADD NEW DRINK=*=\n");
+        System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t=*=ADD NEW DRINK=*=\n" + ColorText.ANSI_RED);
         do {
-            System.out.print("Input ID: ");
+            System.out.print("\t\t\t\t\tInput ID: ");
             ID = Validate.getAInteger();
             if (isDuplicate(ID)) {
-                System.out.println("\nID is DUPLICATE.\n");
+                System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~ID IS DUPLICATE.\n" + ColorText.ANSI_RED);
             }
         } while (isDuplicate(ID));
 
-        System.out.print("Name: ");
+        System.out.print("\t\t\t\t\tInput Name: ");
         name = sc.nextLine();
-        System.out.print("Price: ");
+        System.out.print("\t\t\t\t\tInput Price: ");
         price = Validate.getADouble();
         Product newProduct = new Product(ID, name, price);
-        System.out.print("Quantity: ");
+        System.out.print("\t\t\t\t\tInput Quantity: ");
         quantity = Validate.getAInteger();
         newProduct.setQuanity(quantity);
-        System.out.println("\n=*=ADDED SUCCESSFULLY=*=\n");
+        System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~ADDED SUCCESSFULLY\n" + ColorText.ANSI_GREEN);
         data.add(newProduct);
         IOFileMenu.writeToFile(data, MENU_FILE);
     }
 
     public void viewProduct() {
         data.clear();
-        System.out.println("\n=*=MENU=*=\n");
+        System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t\t=*=MENU=*=\n" + ColorText.ANSI_RED);
         data = IOFileMenu.readFromFile(MENU_FILE);
-        System.out.printf("|%-3s|%-10s|%-5s|\n", "ID", "Name", "Price");
+        System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|\n", "ID", "Name", "Price");
         for (int i = 0; i < data.size(); i++) {
             System.out.println(data.get(i).toString());
         }
@@ -64,11 +64,11 @@ public class ProductData {
         int ID = 0;
         boolean found = false;
         data = IOFileMenu.readFromFile(MENU_FILE);
-        System.out.print("\nInput ID need find: ");
+        System.out.print("\n\t\t\t\t\tInput ID Need To Find: ");
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == ID) {
-                System.out.printf("\n|%-3s|%-10s|%-5s|\n", "ID", "Name", "Price");
+                System.out.printf("\n\t\t\t\t\t\t|%-3s|%-10s|%-5s|\n", "ID", "Name", "Price");
                 System.out.println(data.get(i).toString());
                 found = true;
 
@@ -76,7 +76,7 @@ public class ProductData {
             }
         }
         if (!found) {
-            System.out.println("\nNot found ID.");
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~NOT FOUND ID." + ColorText.ANSI_RED);
         }
 
     }
@@ -87,45 +87,43 @@ public class ProductData {
         String color;
         double price;
         boolean found = false;
-        System.out.print("\nInput ID need update: ");
+        System.out.print("\n\t\t\t\t\tInput ID Need Update: ");
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == ID) {
-                System.out.print("Input new name: ");
+                System.out.print("\t\t\t\t\tInput New Name: ");
                 name = sc.nextLine();
                 data.get(i).setName(name);
-                System.out.print("Input new price: ");
+                System.out.print("\t\t\t\t\tInput New Price: ");
                 price = Validate.getADouble();
                 data.get(i).setPrice(price);
                 found = true;
-                System.out.println("\n=*=UPDATE SUCCESSFULLY=*=");
+                System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~UPDATE SUCCESSFULLY." + ColorText.ANSI_GREEN);
                 IOFileMenu.writeToFile(data, MENU_FILE);
-                System.out.println("Press any key to continue");
-                sc.next();
                 return;
             }
         }
         if (!found) {
-            System.out.println("\n=*=Not Found ID=*=");
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~NOT FOUND ID." + ColorText.ANSI_RED);
         }
     }
 
     public void deleteProduct() {
         int ID = 0;
-        System.out.print("\n---Input ID need delete: ");
+        System.out.print("\n\t\t\t\t\tInput ID Need Delete: ");
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == ID) {
                 int choice;
-                System.out.println("\nAre you SURE ?");
-                System.out.println("1. I'm sure.");
-                System.out.println("2. Return.");
-                System.out.print("\n---Please choose: ");
+                System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~ARE YOU SURE ?" + ColorText.ANSI_RED);
+                System.out.println("\t\t\t\t\t1. I'm Sure.");
+                System.out.println("\t\t\t\t\t2. Return.");
+                System.out.print("\n\t\t\t\t\t\t---Please Choose: ");
                 choice = Validate.getAInteger();
                 switch (choice) {
                     case 1:
                         data.remove(i);
-                        System.out.println("=*=DELETE SUCCESSFULLY=*=");
+                        System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t~~~DELETE SUCCESSFULLY." + ColorText.ANSI_GREEN);
                         break;
                     case 2:
                         return;
@@ -145,22 +143,22 @@ public class ProductData {
         do {
             boolean found = false;
             do {
-                System.out.print("\n1. Please choose DRINK by input ID: ");
+                System.out.print("\n\t\t\t\t\tChoose DRINK By Input ID: ");
                 ID = Validate.getAInteger();
                 for (i = 0; i < data.size(); i++) {
                     if (data.get(i).getID() == ID) {
                         found = true;
-                        System.out.print("Input quantity: ");
+                        System.out.print("\t\t\t\t\tInput Quantity: ");
                         quantity = Validate.getAInteger();
                         if (quantity > data.get(i).getQuantity()) {
-                            System.out.printf("The product %s just only have %d ones!, please input again or choose another!\n", data.get(i).getName(), data.get(i).getQuantity());
+                            System.out.printf(ColorText.ANSI_RED + "\t\t\tTHE PRODUCT %s JUST ONLY HAVE %d ONES!, PLEASE INPUT AGAIN OR CHOOSE ANOTHER!\n" + ColorText.ANSI_RED + data.get(i).getName(), data.get(i).getQuantity());
                             choiceAgain = 0;
                         } else {
                             data.get(i).setQuanity(data.get(i).getQuantity() - quantity);
                             subTotal = quantity * data.get(i).getPrice();
                             Bill newBill = new Bill(data.get(i).getID(), data.get(i).getName(), data.get(i).getPrice(), quantity, subTotal);
                             info.add(newBill);
-                            System.out.printf("\n|%-3s|%-10s|%-5s|%-7s|%-5s\n", "ID", "Name", "Price", "Quantity", "Total");
+                            System.out.printf("\n\t\t\t\t|%-3s|%-10s|%-5s|%-7s|%-5s\n", "ID", "Name", "Price", "Quantity", "Total");
                             System.out.println(newBill.toString());
                             sum = sum + subTotal;
                             choiceAgain = 1;
@@ -168,20 +166,20 @@ public class ProductData {
                     }
                 }
                 if (!found) {
-                    System.out.println("\nNot found ID.");
+                    System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~NOT FOUND ID." + ColorText.ANSI_RED);
                 }
 
             } while (found == false);
-            System.out.print("\nEnter '1' to finish or Press other number to continue: ");
+            System.out.print(ColorText.ANSI_CYAN + "\n\t\t\t\t\tEnter '1' To Finish Or Press Other Number To Continue: " + ColorText.ANSI_CYAN);
             choice = Validate.getAInteger();
         } while (choice != 1 || choiceAgain == 0);
         IOFileMenu.writeToFile(data, MENU_FILE);
-        System.out.println("Are you a member? ");
-        System.out.print("Press '1' If You're Member OR Other Numbers To Finish: ");
+        System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~ARE YOU MEMBER? " + ColorText.ANSI_RED);
+        System.out.print(ColorText.ANSI_CYAN + "\n\t\t\t\t\tPress '1' If You Are Member OR Other Numbers To Finish: " + ColorText.ANSI_CYAN);
         if (Validate.getAInteger() == 1) {
             int number, answer = 0;
             do {
-                System.out.print("Enter Your ID: ");
+                System.out.print("\n\t\t\t\t\tEnter Your ID: ");
                 number = Validate.getAInteger();
                 if (dataMember.aMember(number)) {
                     if (dataMember.getMemberStar(number) < 100) {
@@ -197,25 +195,24 @@ public class ProductData {
                     info.get(info.size() - 1).setMemberID(dataMember.getMemberID(number));
                     info.get(info.size() - 1).setStar(dataMember.getMemberStar(number));
                     info.get(info.size() - 1).setDate(date.getTime());
-                    System.out.printf("Total: %.1f, off: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
+                    System.out.printf("\t\t\t\t\t~~~TOTAL: %.1f, OFF: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
                     IOFileMenu.writeToFile(info, BILL_FILE);
                     answer = 2;
                     valid++;
                 } else {
-                    System.out.println("Sorry But You're Not Member!\n");
-                    System.out.print("Press '1' To Continue Or Other Numbers To Finish: ");
+                    System.out.println("\n" + ColorText.ANSI_RED + "\t\t\t\t\t~~~SORRY BUT YOU ARE NOT MEMBER!\n" + ColorText.ANSI_RED);
+                    System.out.print(ColorText.ANSI_CYAN + "\t\t\t\t\tPress '1' To Continue Or Other Numbers To Finish: " + ColorText.ANSI_CYAN);
                     answer = Validate.getAInteger();
                 }
             } while (answer == 1);
-        } else {
-            info.get(info.size() - 1).setSum(sum);
-            info.get(info.size() - 1).setDate(date.getTime());
-            System.out.printf("\nTotal: %.1f, off: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
-            IOFileMenu.writeToFile(info, BILL_FILE);
         }
+        info.get(info.size() - 1).setSum(sum);
+        info.get(info.size() - 1).setDate(date.getTime());
+        System.out.printf("\n\t\t\t\t\t~~~TOTAL: %.1f, OFF: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
+        IOFileMenu.writeToFile(info, BILL_FILE);
 
         if (subTotal >= 100 && valid == 0) {
-            System.out.print("Enter 1 if you want to add member: ");
+            System.out.print(ColorText.ANSI_CYAN + "\t\t\t\t\tEnter 1 If You Want To Add Member: " + ColorText.ANSI_CYAN);
             if (Validate.getAInteger() == 1) {
                 dataMember.addNewMember();
             }
@@ -225,23 +222,23 @@ public class ProductData {
     public void viewAllBills() {
         info.clear();
         info = IOFileMenu.readFromFile(BILL_FILE);
-        System.out.println("----------------------------NEW BILL---------------------------------------");
-        System.out.printf("|%-3s|%-10s|%-5s|%-7s|%-5s\n", "ID", "Name", "Price", "Quantity", "Total");
+        System.out.println("\t\t\t\t----------------------------NEW BILL---------------------------------------");
+        System.out.printf("\t\t\t\t|%-3s|%-10s|%-5s|%-7s|%-5s\n", "ID", "Name", "Price", "Quantity", "Total");
         for (int i = 0; i < info.size(); i++) {
             if (info.get(i).getSum() == 0) {
                 System.out.println(info.get(i).toString());
             }
             if (info.get(i).getSum() > 0) {
                 System.out.println(info.get(i).toString());
-                System.out.println("__________________________________________________________________");
-                System.out.printf("Total: %.1f, off: %.1f\n", info.get(i).getSum(), info.get(i).getOff());
+                System.out.println("\t\t\t\t__________________________________________________________________");
+                System.out.printf("\t\t\t\tTOTAL: %.1f, OFF: %.1f\n", info.get(i).getSum(), info.get(i).getOff());
                 if (info.get(i).getOff() > 0) {
-                    System.out.printf("Member: %s, ID: %d, Star: %d\n", info.get(i).getMemberName(), info.get(i).getMemberID(), info.get(i).getMemberStar());
+                    System.out.printf("\t\t\t\tMember: %s, ID: %d, Star: %d\n", info.get(i).getMemberName(), info.get(i).getMemberID(), info.get(i).getMemberStar());
                 }
-                System.out.println(info.get(i).getDate() + "\n");
+                System.out.println("\t\t\t\t" + info.get(i).getDate() + "\n");
                 if (i != info.size() - 1) {
-                    System.out.println("----------------------------NEW BILL---------------------------------------");
-                    System.out.printf("|%-3s|%-10s|%-5s|%-7s|%-5s\n", "ID", "Name", "Price", "Quantity", "Total");
+                    System.out.println("\t\t\t\t----------------------------NEW BILL---------------------------------------");
+                    System.out.printf("\t\t\t\t|%-3s|%-10s|%-5s|%-7s|%-5s\n", "ID", "Name", "Price", "Quantity", "Total");
                 }
             }
 

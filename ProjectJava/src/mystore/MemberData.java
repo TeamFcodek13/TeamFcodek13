@@ -24,17 +24,17 @@ public class MemberData {
     public void addNewMember() {
         String name, phone;
         int id;
-        System.out.print("Input New Member Name: ");
+        System.out.print("\t\t\t\t\tInput New Member Name: ");
         name = sc.nextLine();
         do {
-            System.out.print("Input ID: ");
+            System.out.print("\t\t\t\t\tInput ID: ");
             id = Validate.getAInteger();
             if (aMember(id)) {
-                System.out.println("ID has already existed!");
+                System.out.println(ColorText.ANSI_RED + "\t\t\t\t\t~~~ID HAS ALREADY EXISTED!" + ColorText.ANSI_RED);
             }
         } while (aMember(id));
         phone = Validate.getPhone();
-        System.out.println("\n=*=ADDED SUCCESSFUL=*=\n");
+        System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~ADDED SUCCESSFUL.\n" + ColorText.ANSI_GREEN);
         newMember = new VipMember(id, name, phone);
         data.add(newMember);
         IOFileMenu.writeToFile(data, MEMBER_FILE);
@@ -42,9 +42,9 @@ public class MemberData {
 
     public void viewAllMember() {
         data.clear();
-        System.out.println("\n=*=LIST MEMBER=*=\n");
+        System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t=*=LIST MEMBER=*=\n" + ColorText.ANSI_RED);
         data = IOFileMenu.readFromFile(MEMBER_FILE);
-        System.out.printf("%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
+        System.out.printf("\t\t\t\t\t\t%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
         for (int i = 0; i < data.size(); i++) {
             System.out.println(data.get(i).toString());
         }
@@ -97,20 +97,20 @@ public class MemberData {
     }
 
     public void findMember() {
-        System.out.print("Enter ID: ");
+        System.out.print("\t\t\t\t\tEnter ID: ");
         int number = Validate.getAInteger();
         boolean found = false;
         data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
         for (int i = 0; i < data.size(); i++) {
             if (number == data.get(i).getId()) {
-                System.out.printf("%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
+                System.out.printf("\t\t\t\t\t\t%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
                 System.out.println(data.get(i).toString());
                 found = true;
             }
         }
         if (!found) {
-            System.out.println("Not found Member @@.");
+            System.out.println(ColorText.ANSI_RED + "\t\t\t\t\t~~~NOT FOUND MEMBER." + ColorText.ANSI_RED);
         }
     }
 
@@ -120,28 +120,28 @@ public class MemberData {
         boolean found = false;
         data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
-        System.out.print("Enter ID: ");
+        System.out.print("\t\t\t\t\tEnter ID: ");
         int number = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (number == data.get(i).getId()) {
-                System.out.printf("%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
+                System.out.printf("\t\t\t\t\t\t%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
                 System.out.println(data.get(i).toString());
-                System.out.print("Input Member's Name: ");
+                System.out.print("\t\t\t\t\tInput Member's Name: ");
                 name = sc.nextLine();
                 phone = Validate.getPhone();
-                System.out.print("Input Member's Star: ");
+                System.out.print("\t\t\t\t\tInput Member's Star: ");
                 star = Validate.getAInteger();
                 newMember = new VipMember(data.get(i).getId(), name, phone);
                 newMember.setStar(star);
                 data.set(i, newMember);
-                System.out.printf("%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
+                System.out.printf("\t\t\t\t\t\t%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
                 System.out.println(data.get(i).toString());
-                System.out.println("CHANGED SUCCESSFULLY");
+                System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t~~~CHANGED SUCCESSFULLY" + ColorText.ANSI_GREEN);
                 found = true;
             }
         }
         if (!found) {
-            System.out.println("Not found Member @@.");
+            System.out.println(ColorText.ANSI_RED + "\t\t\t\t\t~~~NOT FOUND MEMBER." + ColorText.ANSI_RED);
         }
         IOFileMenu.writeToFile(data, MEMBER_FILE);
     }
