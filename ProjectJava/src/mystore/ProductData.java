@@ -199,13 +199,11 @@ public class ProductData {
                         sum = sum * 0.7;
                         info.get(info.size() - 1).setOff(30);
                     }
-                    info.get(info.size() - 1).setSum(sum);
                     info.get(info.size() - 1).setMemberName(dataMember.getMemberName(number));
                     dataMember.setMemberStar(number);
                     info.get(info.size() - 1).setMemberID(dataMember.getMemberID(number));
                     info.get(info.size() - 1).setStar(dataMember.getMemberStar(number));
                     info.get(info.size() - 1).setDate(date.getTime());
-                    System.out.printf("Total: %.1f, off: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
                     IOFileMenu.writeToFile(info, BILL_FILE);
                     answer = 2;
                     valid++;
@@ -215,12 +213,11 @@ public class ProductData {
                     answer = Validate.getAInteger();
                 }
             } while (answer == 1);
-        } else {
-            info.get(info.size() - 1).setSum(sum);
-            info.get(info.size() - 1).setDate(date.getTime());
-            System.out.printf("\nTotal: %.1f, off: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
-            IOFileMenu.writeToFile(info, BILL_FILE);
         }
+        info.get(info.size() - 1).setSum(sum);
+        info.get(info.size() - 1).setDate(date.getTime());
+        System.out.printf("\nTotal: %.1f, off: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
+        IOFileMenu.writeToFile(info, BILL_FILE);
 
         if (subTotal >= 100 && valid == 0) {
             System.out.print("Enter 1 if you want to add member: ");

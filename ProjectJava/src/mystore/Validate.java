@@ -19,7 +19,9 @@ public class Validate {
         while (true) {
             try {
                 number = Double.parseDouble(sc.nextLine());
-                return number;
+                if (number > 0) {
+                    return number;
+                }
             } catch (Exception ex) {
                 System.out.println("Error");
             }
