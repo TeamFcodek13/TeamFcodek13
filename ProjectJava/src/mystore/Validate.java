@@ -18,10 +18,16 @@ public class Validate {
         double number;
         while (true) {
             try {
-                number = Double.parseDouble(sc.nextLine());
-                return number;
+                number = Double.parseDouble(sc.nextLine().trim());
+                if (number > 0) {
+                    return number;
+                } else {
+                    System.out.print("\n" + ColorText.ANSI_RED + "\t\t\t\t\t~~~YOU MUST ENTER A POSITIVE INTEGER!");
+                    System.out.print("\n\t\t\t\t\t~~~Input Again: ");
+                }
             } catch (Exception ex) {
-                System.out.println("Error");
+                System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~YOU MUST ENTER A REAL NUMBER!" + ColorText.ANSI_RED);
+                System.out.print("\n\t\t\t\t\t~~~Input Again: ");
             }
         }
     }
@@ -31,14 +37,35 @@ public class Validate {
         int number;
         while (true) {
             try {
-                number = Integer.parseInt(sc.nextLine());
+                number = Integer.parseInt(sc.nextLine().trim());
                 if (number > 0) {
                     return number;
                 } else {
-                    System.out.println("Error.\n");
+                    System.out.print("\n" + ColorText.ANSI_RED + "\t\t\t\t\t~~~YOU MUST ENTER A POSITIVE INTEGER!");
+                    System.out.print("\n\t\t\t\t\t~~~Input Again: ");
                 }
             } catch (Exception e) {
-                System.out.println("Error.\n");
+                System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~YOU MUST ENTER AN INTEGER!" + ColorText.ANSI_RED);
+                System.out.print("\n\t\t\t\t\t~~~Input Again: ");
+            }
+        }
+    }
+
+    public static int getChoice(int num1, int num2) {
+        Scanner sc = new Scanner(System.in);
+        int number;
+        while (true) {
+            try {
+                number = Integer.parseInt(sc.nextLine().trim());
+                if (number > num1 && number < num2) {
+                    return number;
+                } else {
+                    System.out.printf("\n" + ColorText.ANSI_RED + "\t\t\t\t\t~~~YOU MUST ENTER A POSITIVE INTEGER (%d < n < %d)!", num1, num2);
+                    System.out.print("\n\n\t\t\t\t\t~~~Input Again: ");
+                }
+            } catch (Exception e) {
+                System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~YOU MUST ENTER AN INTEGER!" + ColorText.ANSI_RED);
+                System.out.print("\n\t\t\t\t\t~~~Input Again: ");
             }
         }
     }
@@ -47,32 +74,35 @@ public class Validate {
         Scanner sc = new Scanner(System.in);
         String rePhone = "0\\d{9,10}", phone;
         do {
-            System.out.print("Enter your phone number: ");
-            phone = sc.nextLine();
+            System.out.print("\t\t\t\t\tEnter Your Phone Number: ");
+            phone = sc.nextLine().trim();
             if (phone.matches(rePhone)) {
                 return phone;
             } else {
-                System.out.println("Error please input again");
+                System.out.println("\n\t\t\t\t\t~~YOU MUST ENTER 10 OR 11 NUMBERS BEGIN WITH 0 VÀ PHẢI VIẾT LIỀN NHAU!\n");
             }
         } while (!phone.matches(rePhone));
         return null;
     }
 
-    public static int getAnswer(int num1, int num2) {
+    public static String inputPassword() {
         Scanner sc = new Scanner(System.in);
-        int number;
-        while (true) {
-            try {
-                System.out.print("Your answer: ");
-                number = Integer.parseInt(sc.nextLine());
-                if (number >= num1 && number <= num2) {
-                    return number;
+        boolean found = false;
+        String password;
+        int i;
+        do {
+            password = sc.nextLine();
+            for (i = 0; i < password.length(); i++) {
+                if (Character.isWhitespace(password.charAt(i))) {
+                    found = true;
+                    System.out.println("\n" + ColorText.ANSI_RED + "\t\t\t\t\tPASSWORD IS NOT ALLOWED TO ENTER BLANK CHARACTERS!");
+                    System.out.print("\n\t\t\t\t\tEnter Your Password Number Again: ");
+                    break;
                 } else {
-                    System.out.println("Error.\n");
+                    found = false;
                 }
-            } catch (Exception e) {
-                System.out.println("Error.\n");
             }
-        }
+        } while (found == true);
+        return password;
     }
 }

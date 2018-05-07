@@ -55,7 +55,7 @@ public class VipMember implements Serializable {
     }
 
     public String toString() {
-        return String.format("%-5d|%-7s|%-12s|%-5d", id, name, phone, star);
+        return String.format("\t\t\t\t\t\t%-5d|%-7s|%-12s|%-5d", id, name, phone, star);
     }
 
 }
