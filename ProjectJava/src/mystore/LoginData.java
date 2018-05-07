@@ -24,23 +24,24 @@ public class LoginData {
 
     public void changePassword() {
 
-        String password1;
-        String password2;
-        String newPassword;
-
+        String password;
+        String newPassword1;
+        String newPassword2;
+        
+        data = IOFileMenu.readFromFile(ACCOUNT_FILE);
         System.out.print("\n\t\t\t\t\tEnter Current Password: ");
-        password1 = sc.nextLine();
-        System.out.print("\t\t\t\t\tEnter Current Password Again: ");
-        password2 = sc.nextLine();
+        password = sc.nextLine();
         System.out.print("\t\t\t\t\tEnter New Password: ");
-        newPassword = sc.nextLine();
-        if (data.get(0).getPassword().equals(password1)) {
-            if (password1.equals(password2)) {
+        newPassword1 = Validate.inputPassword();
+        System.out.print("\t\t\t\t\tEnter New Password Again: ");
+        newPassword2 = Validate.inputPassword();
+        if (data.get(0).getPassword().equals(password)) {
+            if (newPassword1.equals(newPassword2)) {
                 System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~CHANGE PASSWORD SUCCESSFULLY." + ColorText.ANSI_GREEN);
-                data.get(0).setPassword(newPassword);
+                data.get(0).setPassword(newPassword2);
                 IOFileMenu.writeToFile(data, ACCOUNT_FILE);
             } else {
-                System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~ENTER CURRENT PASSWORD AGAIN INCORRECT. " + ColorText.ANSI_RED);
+                System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~ENTER PASSWORD AGAIN INCORRECT. " + ColorText.ANSI_RED);
             }
         }
         else {
@@ -55,7 +56,7 @@ public class LoginData {
         System.out.print("\n\t\t\t\t\tInput NEW User Name: ");
         userName = sc.nextLine();
         System.out.print("\t\t\t\t\tInput NEW Password: ");
-        password = sc.nextLine();
+        password = Validate.inputPassword();
         System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~CREATE NEW ACCOUNT SUCCESSFULLY." + ColorText.ANSI_GREEN);
         
         account = new AccountManager(userName, password);
@@ -66,11 +67,13 @@ public class LoginData {
     }
 
     public void login() {
+
         int i = 1;
         boolean match = false;
         String userName;
         String password;
         int lastIndex;
+
         do {
             data.clear();
             data = IOFileMenu.readFromFile(ACCOUNT_FILE);
@@ -79,7 +82,6 @@ public class LoginData {
             userName = sc.nextLine();
             System.out.print("\t\t\t\t\tInput Password: ");
             password = sc.nextLine();
-
             account = new AccountManager(userName, password);
             data = IOFileMenu.readFromFile(ACCOUNT_FILE);
             data.add(account);

@@ -30,7 +30,8 @@ public class ProductQuantity {
         int id;
         data.clear();
         data = IOFileMenu.readFromFile(PRODUCT);
-        System.out.print("\nInput ID Need To Find: ");
+        viewAllQuantity();
+        System.out.print("\n\t\t\t\t\tInput ID Need To Find: ");
         id = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == id) {
@@ -50,6 +51,8 @@ public class ProductQuantity {
         data = IOFileMenu.readFromFile(PRODUCT);
         int ID = 0, quantity;
         boolean found = false;
+        data = IOFileMenu.readFromFile(PRODUCT);
+        viewAllQuantity();
         System.out.print("\n\t\t\t\t\tInput ID Need To Update: ");
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
