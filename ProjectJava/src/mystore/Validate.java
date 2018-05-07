@@ -22,7 +22,7 @@ public class Validate {
                 if (number > 0) {
                     return number;
                 } else {
-                    System.out.print("\n" + ColorText.ANSI_RED + "\t\t\t\t\t~~~YOU MUST ENTER A POSITIVE INTEGER!");
+                    System.out.print("\n" + ColorText.ANSI_RED + "\t\t\t\t\t~~~YOU MUST ENTER A POSITIVE NUMBER!");
                     System.out.print("\n\t\t\t\t\t~~~Input Again: ");
                 }
             } catch (Exception ex) {
@@ -74,7 +74,7 @@ public class Validate {
         Scanner sc = new Scanner(System.in);
         String rePhone = "0\\d{9,10}", phone;
         do {
-            System.out.print("\t\t\t\t\tEnter Your Phone Number: ");
+            System.out.print("\t\t\t\t\tEnter Phone Number: ");
             phone = sc.nextLine().trim();
             if (phone.matches(rePhone)) {
                 return phone;

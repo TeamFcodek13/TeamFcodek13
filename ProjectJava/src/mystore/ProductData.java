@@ -88,7 +88,6 @@ public class ProductData {
     public void updateProduct() {
         int ID = 0;
         String name;
-        String color;
         double price;
         boolean found = false;
         data = IOFileMenu.readFromFile(MENU_FILE);
