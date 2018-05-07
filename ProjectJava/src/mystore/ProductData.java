@@ -37,7 +37,7 @@ public class ProductData {
         } while (isDuplicate(ID));
 
         System.out.print("\t\t\t\t\tInput Name: ");
-        name = sc.nextLine();
+        name = sc.nextLine().trim().toUpperCase();
         System.out.print("\t\t\t\t\tInput Price: ");
         price = Validate.getADouble();
         Product newProduct = new Product(ID, name, price);
@@ -64,6 +64,7 @@ public class ProductData {
         int ID = 0;
         boolean found = false;
         data = IOFileMenu.readFromFile(MENU_FILE);
+        viewProduct();
         System.out.print("\n\t\t\t\t\tInput ID Need To Find: ");
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
@@ -87,12 +88,14 @@ public class ProductData {
         String color;
         double price;
         boolean found = false;
+        data = IOFileMenu.readFromFile(MENU_FILE);
+        viewProduct();
         System.out.print("\n\t\t\t\t\tInput ID Need Update: ");
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == ID) {
                 System.out.print("\t\t\t\t\tInput New Name: ");
-                name = sc.nextLine();
+                name = sc.nextLine().trim().toUpperCase();
                 data.get(i).setName(name);
                 System.out.print("\t\t\t\t\tInput New Price: ");
                 price = Validate.getADouble();
@@ -110,16 +113,19 @@ public class ProductData {
 
     public void deleteProduct() {
         int ID = 0;
+        boolean found = false;
+        data = IOFileMenu.readFromFile(MENU_FILE);
         System.out.print("\n\t\t\t\t\tInput ID Need Delete: ");
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == ID) {
+                found = true;
                 int choice;
                 System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~ARE YOU SURE ?" + ColorText.ANSI_RED);
                 System.out.println("\t\t\t\t\t1. I'm Sure.");
                 System.out.println("\t\t\t\t\t2. Return.");
                 System.out.print("\n\t\t\t\t\t\t---Please Choose: ");
-                choice = Validate.getAInteger();
+                choice = Validate.getChoice(0, 3);
                 switch (choice) {
                     case 1:
                         data.remove(i);
@@ -129,6 +135,9 @@ public class ProductData {
                         return;
                 }
             }
+        }
+        if (!found) {
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~NOT FOUND ID." + ColorText.ANSI_RED);
         }
         IOFileMenu.writeToFile(data, MENU_FILE);
     }
@@ -151,7 +160,7 @@ public class ProductData {
                         System.out.print("\t\t\t\t\tInput Quantity: ");
                         quantity = Validate.getAInteger();
                         if (quantity > data.get(i).getQuantity()) {
-                            System.out.printf(ColorText.ANSI_RED + "\t\t\tTHE PRODUCT %s JUST ONLY HAVE %d ONES!, PLEASE INPUT AGAIN OR CHOOSE ANOTHER!\n" + ColorText.ANSI_RED + data.get(i).getName(), data.get(i).getQuantity());
+                            System.out.printf(ColorText.ANSI_RED + "\t\t\tTHE PRODUCT %s JUST ONLY HAVE %s ONES!, PLEASE INPUT AGAIN OR CHOOSE ANOTHER!\n", data.get(i).getName(), data.get(i).getQuantity());
                             choiceAgain = 0;
                         } else {
                             data.get(i).setQuanity(data.get(i).getQuantity() - quantity);

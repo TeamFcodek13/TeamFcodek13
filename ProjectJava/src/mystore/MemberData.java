@@ -25,7 +25,7 @@ public class MemberData {
         String name, phone;
         int id;
         System.out.print("\t\t\t\t\tInput New Member Name: ");
-        name = sc.nextLine();
+        name = sc.nextLine().trim().toUpperCase();
         do {
             System.out.print("\t\t\t\t\tInput ID: ");
             id = Validate.getAInteger();
@@ -127,7 +127,7 @@ public class MemberData {
                 System.out.printf("\t\t\t\t\t\t%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
                 System.out.println(data.get(i).toString());
                 System.out.print("\t\t\t\t\tInput Member's Name: ");
-                name = sc.nextLine();
+                name = sc.nextLine().trim().toUpperCase();
                 phone = Validate.getPhone();
                 System.out.print("\t\t\t\t\tInput Member's Star: ");
                 star = Validate.getAInteger();
