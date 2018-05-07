@@ -28,23 +28,23 @@ public class LoginData {
         String password2;
         String newPassword;
 
-        System.out.print("\nEnter Current Password: ");
+        System.out.print("\n\t\t\t\t\tEnter Current Password: ");
         password1 = sc.nextLine();
-        System.out.print("Enter Current Password Again: ");
+        System.out.print("\t\t\t\t\tEnter Current Password Again: ");
         password2 = sc.nextLine();
-        System.out.print("Enter New Password: ");
+        System.out.print("\t\t\t\t\tEnter New Password: ");
         newPassword = sc.nextLine();
         if (data.get(0).getPassword().equals(password1)) {
             if (password1.equals(password2)) {
-                System.out.println("\nCHANGE PASSWORD SUCCESSFULLY.");
+                System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~CHANGE PASSWORD SUCCESSFULLY." + ColorText.ANSI_GREEN);
                 data.get(0).setPassword(newPassword);
                 IOFileMenu.writeToFile(data, ACCOUNT_FILE);
             } else {
-                System.out.println("\nENTER CURRENT PASSWORD AGAIN INCORRECT. ");
+                System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~ENTER CURRENT PASSWORD AGAIN INCORRECT. " + ColorText.ANSI_RED);
             }
         }
         else {
-            System.out.println("\nINCORRECT CURRENT PASSWORD.");
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~INCORRECT CURRENT PASSWORD." + ColorText.ANSI_RED);
         }
     }
 
@@ -52,11 +52,11 @@ public class LoginData {
         String userName;
         String password;
 
-        System.out.print("\nInput NEW User Name: ");
+        System.out.print("\n\t\t\t\t\tInput NEW User Name: ");
         userName = sc.nextLine();
-        System.out.print("Input NEW Password: ");
+        System.out.print("\t\t\t\t\tInput NEW Password: ");
         password = sc.nextLine();
-        System.out.println("\nCREATE NEW ACCOUNT SUCCESSFULLY.");
+        System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~CREATE NEW ACCOUNT SUCCESSFULLY." + ColorText.ANSI_GREEN);
         
         account = new AccountManager(userName, password);
         data.clear();
@@ -74,10 +74,10 @@ public class LoginData {
         do {
             data.clear();
             data = IOFileMenu.readFromFile(ACCOUNT_FILE);
-            System.out.println("\n==*==LOGIN==*==");
-            System.out.print("\nInput User Name: ");
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t\t==*==LOGIN==*==" + ColorText.ANSI_RED);
+            System.out.print("\n\t\t\t\t\tInput User Name: ");
             userName = sc.nextLine();
-            System.out.print("Input Password: ");
+            System.out.print("\t\t\t\t\tInput Password: ");
             password = sc.nextLine();
 
             account = new AccountManager(userName, password);
@@ -90,8 +90,8 @@ public class LoginData {
 
             } else {
                 match = false;
-                System.out.println("\nINCORRECT USERNAME OR PASSWORD.");
-                System.out.println("PLEASE INPUT AGAIN.\n");
+                System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~INCORRECT USERNAME OR PASSWORD." + ColorText.ANSI_RED);
+                System.out.println(ColorText.ANSI_RED + "\t\t\t\t\t~~~PLEASE INPUT AGAIN.\n" + ColorText.ANSI_RED);
             }
         } while (match == false);
 

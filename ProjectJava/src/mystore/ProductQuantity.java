@@ -19,7 +19,7 @@ public class ProductQuantity {
     public void viewAllQuantity() {
         data.clear();
         data = IOFileMenu.readFromFile(PRODUCT);
-        System.out.printf(ColorText.ANSI_BLUE + "|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+        System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
         for (int i = 0; i < data.size(); i++) {
             System.out.println(data.get(i).toStringwithQuantity());
         }
@@ -30,43 +30,45 @@ public class ProductQuantity {
         int id;
         data.clear();
         data = IOFileMenu.readFromFile(PRODUCT);
-        System.out.print("\nInput ID need find: ");
+        System.out.print("\nInput ID Need To Find: ");
         id = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == id) {
-                System.out.printf(ColorText.ANSI_BLUE + "|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+                System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
                 System.out.println(data.get(i).toStringwithQuantity());
                 found = true;
                 return;
             }
         }
         if (!found) {
-            System.out.println("\nNot found ID.");
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~NOT FOUND ID." + ColorText.ANSI_RED);
         }
     }
 
     public void updateQuantity() {
+        data.clear();
+        data = IOFileMenu.readFromFile(PRODUCT);
         int ID = 0, quantity;
         boolean found = false;
-        System.out.print("\nInput ID need update: ");
+        System.out.print("\n\t\t\t\t\tInput ID Need To Update: ");
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == ID) {
-                System.out.printf(ColorText.ANSI_BLUE + "|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+                System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
                 System.out.println(data.get(i).toStringwithQuantity());
-                System.out.print("Enter Quanity: ");
+                System.out.print("\t\t\t\t\tInput Quanity: ");
                 quantity = Validate.getAInteger();
                 data.get(i).setQuanity(quantity);
                 found = true;
-                System.out.println("\n=*=UPDATE SUCCESSFULLY=*=");
-                System.out.printf(ColorText.ANSI_BLUE + "|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+                System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~UPDATE SUCCESSFULLY." + ColorText.ANSI_GREEN);
+                System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
                 System.out.println(data.get(i).toStringwithQuantity());
                 IOFileMenu.writeToFile(data, PRODUCT);
                 return;
             }
         }
         if (!found) {
-            System.out.println("\n=*=Not Found ID=*=");
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t~~~NOT FOUND ID." + ColorText.ANSI_RED);
         }
     }
 }
