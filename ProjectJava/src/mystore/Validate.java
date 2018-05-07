@@ -21,7 +21,7 @@ public class Validate {
                 number = Double.parseDouble(sc.nextLine());
                 return number;
             } catch (Exception ex) {
-                System.out.print("\nError. Input Again! ");
+                System.out.println("\n\t\t\t\t\t~~~Input Again: ");
             }
         }
     }
@@ -34,42 +34,45 @@ public class Validate {
                 number = Integer.parseInt(sc.nextLine());
                 if (number > 0) {
                     return number;
+                } else {
+                    System.out.println("\n\t\t\t\t\t~~~Input Again: ");
                 }
-                else System.out.print("\nError. Input Again!\n ");
             } catch (Exception e) {
-                System.out.println("\nError. Input Again!\n ");
+                System.out.println("\n\t\t\t\t\t~~~Input Again: ");
             }
         }
     }
+
     public static String getPhone() {
         Scanner sc = new Scanner(System.in);
         String rePhone = "0\\d{9,10}", phone;
         do {
-            System.out.print("Enter your phone number: ");
+            System.out.print("\t\t\t\t\tEnter Your Phone Number: ");
             phone = sc.nextLine();
             if (phone.matches(rePhone)) {
                 return phone;
             } else {
-                System.out.println("Error please input again\n");
+                System.out.println("\n\t\t\t\t\t~~~ERROR PLEASE INPUT AGAIN!\n");
             }
         } while (!phone.matches(rePhone));
         return null;
     }
+
     public static int getAnswer(int num1, int num2) {
         Scanner sc = new Scanner(System.in);
         int number;
         while (true) {
             try {
-                System.out.print("Your answer: ");
+                System.out.print("\t\t\t\t\tYour Answer: ");
                 number = Integer.parseInt(sc.nextLine());
                 if (number >= num1 && number <= num2) {
                     return number;
+                } else {
+                    System.out.println("\t\t\t\t\t~~~ERROR.\n");
                 }
-                else System.out.print("\nError. Input Again!\n ");
             } catch (Exception e) {
-                System.out.println("\nError. Input Again!\n ");
+                System.out.println("\t\t\t\t\t~~~ERROR.\n");
             }
         }
     }
-
 }

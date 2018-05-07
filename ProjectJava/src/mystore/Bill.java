@@ -1,3 +1,4 @@
+
 package mystore;
 
 import java.io.Serializable;
@@ -46,7 +47,7 @@ public class Bill implements Serializable {
     public int getMemberID() {
         return memberID;
     }
-
+    
     public int getMemberStar() {
         return star;
     }
@@ -70,12 +71,12 @@ public class Bill implements Serializable {
     public void setMemberID(int id) {
         this.memberID = id;
     }
-
     public void setStar(int star) {
         this.star = star;
     }
 
+
     public String toString() {
-        return String.format("|%-3d|%-10s|%-5.1f|%-8d|%-5.1f", ID, name, price, quantity, subTotal);
+        return String.format("\t\t\t\t|%-3d|%-10s|%-5.1f|%-8d|%-5.1f", ID, name, price, quantity, subTotal);
     }
 }

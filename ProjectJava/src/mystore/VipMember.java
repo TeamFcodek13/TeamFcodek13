@@ -16,12 +16,6 @@ public class VipMember implements Serializable {
     private String name, phone;
     private int id, star = 0;
 
-    VipMember(int id, String name, String phone) {
-        this.name = name;
-        this.id = id;
-        this.phone = phone;
-    }
-
     public String getName() {
         return name;
     }
@@ -54,8 +48,14 @@ public class VipMember implements Serializable {
         this.star = star;
     }
 
+    VipMember(int id, String name, String phone) {
+        this.name = name;
+        this.id = id;
+        this.phone = phone;
+    }
+
     public String toString() {
-        return String.format("%-5d|%-7s|%-12s|%-5d", id, name, phone, star);
+        return String.format("\t\t\t\t\t\t%-5d|%-7s|%-12s|%-5d", id, name, phone, star);
     }
 
 }
