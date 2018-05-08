@@ -79,7 +79,7 @@ public class Validate {
             if (phone.matches(rePhone)) {
                 return phone;
             } else {
-                System.out.println("\n\t\t\t\t\t~~YOU MUST ENTER 10 OR 11 NUMBERS BEGIN WITH 0 VÀ PHẢI VIẾT LIỀN NHAU!\n");
+                System.out.println("\n\t\t\t~~YOU MUST ENTER 10 OR 11 NUMBERS BEGIN WITH 0 and MUST BE WRITTEN SEQUENTIALLY!\n");
             }
         } while (!phone.matches(rePhone));
         return null;

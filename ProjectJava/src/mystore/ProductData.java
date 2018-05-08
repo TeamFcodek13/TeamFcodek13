@@ -58,24 +58,25 @@ public class ProductData {
             if (data.get(i).getQuantity() != 0) {
                 System.out.println(data.get(i).toString());
             }
-
         }
 
     }
 
     public void findProduct() {
-        int ID = 0;
+        int id = 0;
         boolean found = false;
         data = IOFileMenu.readFromFile(MENU_FILE);
-        viewProduct();
-        System.out.print("\n\t\t\t\t\tInput ID Need To Find: ");
-        ID = Validate.getAInteger();
+        System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
         for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).getID() == ID) {
-                System.out.printf("\n\t\t\t\t\t\t|%-3s|%-10s|%-5s|\n", "ID", "Name", "Price");
-                System.out.println(data.get(i).toString());
+            System.out.println(data.get(i).toStringwithQuantity());
+        }
+        System.out.print("\n\t\t\t\t\tInput ID Need To Find: ");
+        id = Validate.getAInteger();
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getID() == id) {
+                System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+                System.out.println(data.get(i).toStringwithQuantity());
                 found = true;
-
                 return;
             }
         }
@@ -86,23 +87,33 @@ public class ProductData {
     }
 
     public void updateProduct() {
-        int ID = 0;
+        int ID = 0, quantity;
         String name;
         double price;
         boolean found = false;
         data = IOFileMenu.readFromFile(MENU_FILE);
-        viewProduct();
+        System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+        for (int i = 0; i < data.size(); i++) {
+            System.out.println(data.get(i).toStringwithQuantity());
+        }
         System.out.print("\n\t\t\t\t\tInput ID Need Update: ");
         ID = Validate.getAInteger();
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getID() == ID) {
+                System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+                System.out.println(data.get(i).toStringwithQuantity());
                 System.out.print("\t\t\t\t\tInput New Name: ");
                 name = sc.nextLine().trim().toUpperCase();
                 data.get(i).setName(name);
                 System.out.print("\t\t\t\t\tInput New Price: ");
                 price = Validate.getADouble();
                 data.get(i).setPrice(price);
+                System.out.print("\t\t\t\t\tInput Quanity: ");
+                quantity = Validate.getAInteger();
+                data.get(i).setQuanity(quantity);
                 found = true;
+                System.out.printf("\t\t\t\t\t\t|%-3s|%-10s|%-5s|%-9s\n", "ID", "Name", "Price", "Quantity");
+                System.out.println(data.get(i).toStringwithQuantity());
                 System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~UPDATE SUCCESSFULLY." + ColorText.ANSI_GREEN);
                 IOFileMenu.writeToFile(data, MENU_FILE);
                 return;
@@ -147,6 +158,11 @@ public class ProductData {
     }
 
     public void orderDrink() {
+        final int minBillOrStar = 100;
+        final int minTotal = 300;
+        final int bigBillSmallStar = 20;
+        final int smallBillBigStar = 10;
+        final int bigBillBigStar = 25;
         int ID, quantity = 0, choice, i, valid = 0, billID;
         double sum = 0, subTotal = 0;
         data = IOFileMenu.readFromFile(MENU_FILE);
@@ -195,28 +211,31 @@ public class ProductData {
                 do {
                     System.out.print("\n\t\t\t\t\tEnter Your ID: ");
                     number = Validate.getAInteger();
-                    if (dataMember.aMember(number)) {
-                        if (dataMember.getMemberStar(number) < 100) {
-                            if (sum < 200) {
-                                sum = sum * 0.9;
-                                info.get(info.size() - 1).setOff(10);
+                    if (dataMember.isAMember(number)) {
+                        if (dataMember.getMemberStar(number) < minBillOrStar) {
+                            if (sum < minTotal) {
+                                dataMember.setMemberStar(number, minTotal / minTotal);
+                            } else {
+                                dataMember.setMemberStar(number, minTotal / 100);
+                            }
+                        }
+                        if (dataMember.getMemberStar(number) < minBillOrStar) {
+                            if (sum < minTotal) {
+                                System.out.printf("\t\t\tBILL MUSTN'T LESS THAN %d TO GET OFF!\n", minTotal);
                             } else {
                                 sum = sum * 0.8;
-                                info.get(info.size() - 1).setOff(20);
+                                info.get(info.size() - 1).setOff(bigBillSmallStar);
                             }
                         } else {
-                            if (sum < 200) {
-                                sum = sum * 0.85;
-                                info.get(info.size() - 1).setOff(15);
+                            if (sum < minTotal) {
+                                sum = sum * 0.9;
+                                info.get(info.size() - 1).setOff(smallBillBigStar);
                             } else {
                                 sum = sum * 0.75;
-                                info.get(info.size() - 1).setOff(25);
+                                info.get(info.size() - 1).setOff(bigBillBigStar);
                             }
                         }
                         info.get(info.size() - 1).setMemberName(dataMember.getMemberName(number));
-                        if (dataMember.getMemberStar(number) <= 100) {
-                            dataMember.setMemberStar(number);
-                        }
                         info.get(info.size() - 1).setMemberID(dataMember.getMemberID(number));
                         info.get(info.size() - 1).setStar(dataMember.getMemberStar(number));
                         answer = 2;
@@ -233,7 +252,7 @@ public class ProductData {
             info.get(info.size() - 1).setDate(date.getTime());
             System.out.printf("\n\t\t\t\t\t~~~TOTAL: %.1f, OFF: %.1f\n", info.get(info.size() - 1).getSum(), info.get(info.size() - 1).getOff());
             IOFileMenu.writeToFile(info, BILL_FILE);
-            if (subTotal >= 100 && valid == 0) {
+            if (subTotal >= minBillOrStar && valid == 0) {
                 System.out.print(ColorText.ANSI_CYAN + "\t\t\t\t\tEnter 1 If You Want To Add Member: " + ColorText.ANSI_CYAN);
                 if (Validate.getAInteger() == 1) {
                     dataMember.addNewMember();
@@ -280,12 +299,12 @@ public class ProductData {
                  min,
                  j;
                 do {
-                    System.out.print("Enter max ID: ");
+                    System.out.print("\t\t\t\tEnter max ID: ");
                     max = Validate.getAInteger();
-                    System.out.print("Enter min ID: ");
+                    System.out.print("\t\t\t\tEnter min ID: ");
                     min = Validate.getAInteger();
                     if (max < min) {
-                        System.out.println("The Max ID Must Be Bigger Than The Min ID!!");
+                        System.out.println("\t\t\tThe Max ID Must Be Bigger Than The Min ID!!");
                     }
                 } while (max < min);
                 info.clear();
