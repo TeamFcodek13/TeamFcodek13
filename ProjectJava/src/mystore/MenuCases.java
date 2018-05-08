@@ -33,7 +33,7 @@ public class MenuCases {
         System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t2. Manager.");
         System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t3. Exit.");
         System.out.print(ColorText.ANSI_CYAN + "\n\t\t\t\t\t\t---Please Choose: " + ColorText.ANSI_CYAN);
-        choice = Validate.getAInteger();
+        choice = Validate.getChoice(0, 4);
         switch (choice) {
             case 1:
                 menuCases2();
@@ -53,14 +53,14 @@ public class MenuCases {
         int choice;
 
         do {
-            System.out.println(ColorText.ANSI_YELLOW + "\n\t\t\t\t\t\t==*==WELCOM TO PAYING SYSTEM==*==" + ColorText.ANSI_YELLOW);
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t==*==WELCOM TO PAYING SYSTEM==*==" + ColorText.ANSI_RED);
             System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t1. Order And Paying." + ColorText.ANSI_GREEN);
             System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t2. Add Vip Member." + ColorText.ANSI_GREEN);
             System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t3. View All Vip Member." + ColorText.ANSI_GREEN);
             System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t4. Find Vip Member." + ColorText.ANSI_GREEN);
             System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t5. Exit." + ColorText.ANSI_GREEN);
             System.out.print(ColorText.ANSI_CYAN + "\n\t\t\t\t\t\t---Please Choose: " + ColorText.ANSI_CYAN);
-            choice = Validate.getAInteger();
+            choice = Validate.getChoice(0, 6);
             switch (choice) {
                 case 1:
                     dataProduct.orderDrink();
@@ -83,26 +83,54 @@ public class MenuCases {
 
     public void menuCases3() {
 
-        ProductData dataProduct = new ProductData();
         LoginData loginData = new LoginData();
+        loginData.login();
+        menuCases6();
+    }
+
+    public void menuCases4() {
+
+        MemberData dataMember = new MemberData();
         int choice;
 
-        loginData.login();
         do {
-            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t==*==PRODUCT MANAGEMENT==*==" + ColorText.ANSI_RED);
-            System.out.println("\n\t\t\t\t\t1. Add New Drink.");
-            System.out.println("\t\t\t\t\t2. View Menu.");
-            System.out.println("\t\t\t\t\t3. Find By Drink ID.");
-            System.out.println("\t\t\t\t\t4. Update By Drink ID.");
-            System.out.println("\t\t\t\t\t5. Delete By Drink ID.");
-            System.out.println("\t\t\t\t\t6. View All Bill.");
-            System.out.println("\t\t\t\t\t7. Create New Account.");
-            System.out.println("\t\t\t\t\t8. Change Password.");
-            System.out.println("\t\t\t\t\t9. Manage Member.");
-            System.out.println("\t\t\t\t\t10. Manage Quantity.");
-            System.out.println("\t\t\t\t\t11. Exit!");
-            System.out.print(ColorText.ANSI_CYAN + "\n\t\t\t\t\t\t---Please Choose: " + ColorText.ANSI_CYAN);
-            choice = Validate.getAInteger();
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t==*==MEMBER MANAGMENT==*==" + ColorText.ANSI_RED);
+            System.out.println("\n" + ColorText.ANSI_GREEN + "\t\t\t\t\t1. View All Vip Member." + ColorText.ANSI_GREEN);
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t2. Find Member.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t3. Edit Member.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t4. Exit.\n");
+            System.out.print(ColorText.ANSI_CYAN + "\t\t\t\t\t\t---Please Choose: " + ColorText.ANSI_CYAN);
+            choice = Validate.getChoice(0, 5);
+            switch (choice) {
+                case 1:
+                    dataMember.viewAllMember();
+                    break;
+                case 2:
+                    dataMember.findMember();
+                    break;
+                case 3:
+                    dataMember.updateMember();
+                    break;
+                case 4:
+                    menuCases6();
+                    break;
+            }
+        } while (choice != 4);
+    }
+
+    public void menuCases5() {
+        int choice;
+        ProductData dataProduct = new ProductData();
+        do {
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t==*==PRODUCT MANAGMENT==*==" + ColorText.ANSI_RED);
+            System.out.println("\n" + ColorText.ANSI_GREEN + "\t\t\t\t\t1. Add New Product." + ColorText.ANSI_GREEN);
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t2. View All Products." + ColorText.ANSI_GREEN);
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t3. Find A Product.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t4. Edit A Product.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t5. Delete A Product.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t6. Exit.\n");
+            System.out.print(ColorText.ANSI_CYAN + "\t\t\t\t\t\t---Please Choose: " + ColorText.ANSI_CYAN);
+            choice = Validate.getChoice(0, 7);
             switch (choice) {
                 case 1:
                     dataProduct.addNewProduct();
@@ -118,86 +146,51 @@ public class MenuCases {
                     break;
                 case 5:
                     dataProduct.deleteProduct();
-                    break;
+                    break;                    
                 case 6:
-                    dataProduct.viewAllBills();
+                    menuCases6();
                     break;
-                case 7:
-                    loginData.createNewAccount();
-                    break;
-                case 8:
-                    loginData.changePassword();
-                    break;
-                case 9:
-                    menuCases4();
-                    break;
-                case 10:
+            }
+        } while (choice != 6);
+    }
+    
+    public void menuCases6() {
+        
+        ProductData dataProduct = new ProductData();
+        LoginData loginData = new LoginData();
+        
+        int choice;
+
+        do {
+            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t==*==MANAGEMENT==*==" + ColorText.ANSI_RED);
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t1. Manage Product.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t2. Manage Member.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t3. Change Password.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t4. Create New Account.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t5. View Bill.");
+            System.out.println(ColorText.ANSI_GREEN + "\t\t\t\t\t6. Exit!");
+            System.out.print(ColorText.ANSI_CYAN + "\n\t\t\t\t\t\t---Please Choose: " + ColorText.ANSI_CYAN);
+            choice = Validate.getChoice(0, 7);
+            switch (choice) {
+                case 1:
                     menuCases5();
                     break;
-                case 11:
+                case 2:
+                    menuCases4();
+                    break;
+                case 3:
+                    loginData.changePassword();
+                    break;
+                case 4:
+                    loginData.createNewAccount();
+                    break;
+                case 5:
+                    dataProduct.viewAllBills();
+                    break;
+                case 6:
                     menuCases1();
                     break;
             }
-        } while (choice != 11 && choice != 9 && choice != 10);
-    }
-
-    public void menuCases4() {
-
-        MemberData dataMember = new MemberData();
-        int choice;
-
-        do {
-            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t==*==MEMBER MANAGMENT==*==" + ColorText.ANSI_RED);
-            System.out.println("\n\t\t\t\t\t1. View All Vip Member.");
-            System.out.println("\t\t\t\t\t2. Find Member.");
-            System.out.println("\t\t\t\t\t3. Edit Member.");
-            System.out.println("\t\t\t\t\t4. Exit.\n");
-            System.out.print(ColorText.ANSI_CYAN + "\t\t\t\t\t\t---Please Choose: " + ColorText.ANSI_CYAN);
-            choice = Validate.getAInteger();
-            switch (choice) {
-                case 1:
-                    dataMember.viewAllMember();
-                    break;
-                case 2:
-                    dataMember.findMember();
-                    break;
-                case 3:
-                    dataMember.updateMember();
-                    break;
-                case 4:
-                    menuCases3();
-                    break;
-            }
-        } while (choice != 4);
-    }
-
-    public void menuCases5() {
-
-        ProductQuantity dataQuanity = new ProductQuantity();
-        int choice;
-
-        do {
-            System.out.println(ColorText.ANSI_RED + "\n\t\t\t\t\t\t==*==PRODUCT MANAGMENT==*==" + ColorText.ANSI_RED);
-            System.out.println("\n\t\t\t\t\t1. View Quantity Of All Products.");
-            System.out.println("\t\t\t\t\t2. Find Quantity Of A Product.");
-            System.out.println("\t\t\t\t\t3. Edit Quantity Of A Product.");
-            System.out.println("\t\t\t\t\t4. Exit.\n");
-            System.out.print(ColorText.ANSI_CYAN + "\t\t\t\t\t\t---Please Choose: " + ColorText.ANSI_CYAN);
-            choice = Validate.getAInteger();
-            switch (choice) {
-                case 1:
-                    dataQuanity.viewAllQuantity();
-                    break;
-                case 2:
-                    dataQuanity.findAQuanity();
-                    break;
-                case 3:
-                    dataQuanity.updateQuantity();
-                    break;
-                case 4:
-                    menuCases3();
-                    break;
-            }
-        } while (choice != 4);
+        } while (choice != 1 && choice != 2 && choice != 6);
     }
 }

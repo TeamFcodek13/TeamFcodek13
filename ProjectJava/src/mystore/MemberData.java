@@ -25,14 +25,14 @@ public class MemberData {
         String name, phone;
         int id;
         System.out.print("\t\t\t\t\tInput New Member Name: ");
-        name = sc.nextLine();
+        name = sc.nextLine().trim().toUpperCase();
         do {
             System.out.print("\t\t\t\t\tInput ID: ");
             id = Validate.getAInteger();
-            if (aMember(id)) {
+            if (isAMember(id)) {
                 System.out.println(ColorText.ANSI_RED + "\t\t\t\t\t~~~ID HAS ALREADY EXISTED!" + ColorText.ANSI_RED);
             }
-        } while (aMember(id));
+        } while (isAMember(id));
         phone = Validate.getPhone();
         System.out.println(ColorText.ANSI_GREEN + "\n\t\t\t\t\t~~~ADDED SUCCESSFUL.\n" + ColorText.ANSI_GREEN);
         newMember = new VipMember(id, name, phone);
@@ -103,12 +103,12 @@ public class MemberData {
 
     }
 
-    public void setMemberStar(int number) {
+    public void setMemberStar(int number, int sum) {
         data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
         for (int i = 0; i < data.size(); i++) {
             if (number == data.get(i).getId()) {
-                data.get(i).setStar(data.get(i).getStar() + 1);
+                data.get(i).setStar(data.get(i).getStar() + sum);
             }
         }
         IOFileMenu.writeToFile(data, MEMBER_FILE);
@@ -144,10 +144,15 @@ public class MemberData {
                 System.out.printf("\t\t\t\t\t\t%-5s|%-7s|%-12s|%-5s\n", "ID", "Name", "Phone", "Star");
                 System.out.println(data.get(i).toString());
                 System.out.print("\t\t\t\t\tInput Member's Name: ");
-                name = sc.nextLine();
+                name = sc.nextLine().trim().toUpperCase();
                 phone = Validate.getPhone();
-                System.out.print("\t\t\t\t\tInput Member's Star: ");
-                star = Validate.getAInteger();
+                do {
+                    System.out.print("\t\t\t\t\tInput Member's Star: ");
+                    star = Validate.getAInteger();
+                    if (star > 100) {
+                        System.out.println("\t\t\t\tSTAR MUSTN'T BE BIGGER THAN 100!");
+                    }
+                } while (star > 100);
                 newMember = new VipMember(data.get(i).getId(), name, phone);
                 newMember.setStar(star);
                 data.set(i, newMember);
@@ -162,7 +167,8 @@ public class MemberData {
         }
         IOFileMenu.writeToFile(data, MEMBER_FILE);
     }
-    public boolean aMember(int number) {
+
+    public boolean isAMember(int number) {
         data.clear();
         data = IOFileMenu.readFromFile(MEMBER_FILE);
         if (data.size() == 0) {
