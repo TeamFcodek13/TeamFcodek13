@@ -23,11 +23,9 @@ public class IOFileMenu {
     public static <T> void writeToFile(ArrayList<T> arr, String url) {
         File file = new File(url);
         try {
-            FileOutputStream fOS = new FileOutputStream(file);
-            ObjectOutputStream oOS = new ObjectOutputStream(fOS);
-            oOS.writeObject(arr);
-            fOS.close();
-            oOS.close();
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(arr);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
@@ -40,8 +38,8 @@ public class IOFileMenu {
         File file = new File(url);
         try {
             FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream oIS = new ObjectInputStream(fis);
-            arrayList = (ArrayList<T>) oIS.readObject();
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            arrayList = (ArrayList<T>) ois.readObject();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {

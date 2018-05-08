@@ -12,11 +12,11 @@ public class Bill implements Serializable {
     private String name, memberName;
     private Date date;
     private double price;
-    private int ID, quantity, memberID, star, billID = 0;
+    private int iD, quantity, memberID, star, billID = 0;
     private double subTotal, sum = 0, off = 0;
 
     Bill(int ID, String name, double price, int quantity, double subTotal) {
-        this.ID = ID;
+        this.iD = ID;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -84,6 +84,6 @@ public class Bill implements Serializable {
     }
 
     public String toString() {
-        return String.format("\t\t\t\t|%-3d|%-10s|%-5.1f|%-8d|%-5.1f", ID, name, price, quantity, subTotal);
+        return String.format("\t\t\t\t|%-3d|%-10s|%-5.1f|%-8d|%-5.1f", iD, name, price, quantity, subTotal);
     }
 }
